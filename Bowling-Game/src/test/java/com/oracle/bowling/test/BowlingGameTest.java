@@ -186,11 +186,13 @@ public class BowlingGameTest {
     public void TestInvalidPins() {
         int[] pinsPerBall = {0, 10, 0, 3, 2, 6, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 10};
         BowlingGame game = new BowlingGameImpl("Player 1");
+        System.out.println(game.displayScoreBoard());
         try {
             Arrays.stream(pinsPerBall).forEach(game::roll);
         } catch (Exception e) {
             System.out.println(e);
         }
+        System.out.println(game.displayScoreBoard());
         int[] allFramesScore = game.getAllFrameScore();
         Assert.assertEquals(4, allFramesScore.length);
         validateTotalScore("InvalidPins", allFramesScore, 21);

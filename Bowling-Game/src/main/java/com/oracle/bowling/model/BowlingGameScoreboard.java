@@ -28,7 +28,7 @@ public class BowlingGameScoreboard {
      * @return frame for given frame number
      */
     public BowlingFrame getFrame(int frameNumber) {
-        if (bowlingFrameList.size() > frameNumber) {
+        if (frameNumber >= 0 && frameNumber < bowlingFrameList.size()) {
             return bowlingFrameList.get(frameNumber);
         }
         return null;
@@ -45,7 +45,8 @@ public class BowlingGameScoreboard {
      * @return total score of a game
      */
     public int getTotalGameScore() {
-        return bowlingFrameList.get(bowlingFrameList.size() - 1).getFrameScore();
+        BowlingFrame lastFrame = getFrame(bowlingFrameList.size() - 1);
+        return lastFrame != null ? lastFrame.getFrameScore() : 0;
     }
 
     /**
@@ -53,7 +54,7 @@ public class BowlingGameScoreboard {
      * @return score of a frame
      */
     public int getFrameScore(final int frameNumber) {
-        return frameNumber < bowlingFrameList.size() ?
+        return (frameNumber >= 0 && frameNumber < bowlingFrameList.size()) ?
                 bowlingFrameList.get(frameNumber - 1).getFrameScore()
                 : 0;
     }
