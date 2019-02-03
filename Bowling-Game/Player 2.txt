@@ -1,4 +1,0 @@
-
-Player Name='Player 2'
-Total Score=56
-Frame Score=[[Frame:1 [Ball 1:1, Ball 2:0], Frame Score:1], [Frame:2 [Ball 1:1, Ball 2:5], Frame Score:7], [Frame:3 [Ball 1:0, Ball 2:8], Frame Score:15], [Frame:4 [Ball 1:1, Ball 2:8], Frame Score:24], [Frame:5 [Ball 1:0, Ball 2:1], Frame Score:25], [Frame:6 [Ball 1:8, Ball 2:1], Frame Score:34], [Frame:7 [Ball 1:1, Ball 2:0], Frame Score:35], [Frame:8 [Ball 1:1, Ball 2:2], Frame Score:38], [Frame:9 [Ball 1:4, Ball 2:5], Frame Score:47], [Frame:10 [Ball 1:5, Ball 2:/], Frame Score:56]]

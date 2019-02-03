@@ -16,16 +16,15 @@ public class BowlingGameTest {
         BowlingGame game = new BowlingGameImpl("Player 1");
         IntStream.range(0, 10).forEach(i -> game.roll(pinsPerBall[i]));
         int[] framesScore = game.getAllFrameScore();
-        System.out.println("------------------------------------------------");
-        System.out.println("Scoreboard:" + game.displayScoreBoard());
-        System.out.println("------------------------------------------------");
-        System.out.println("BowlingFrame 4 Score:" + game.getFrameScore(4));
+        validateTotalScore("APIs Test", framesScore, 53);
+        System.out.println("Game APIs:");
+        System.out.println("\n");
+        System.out.println("All Frames Score:" + Arrays.toString(framesScore));
         System.out.println("------------------------------------------------");
         System.out.println("Total Score:" + game.getTotalScore());
         System.out.println("------------------------------------------------");
-        System.out.println("All Frames Score:" + Arrays.toString(framesScore));
-        System.out.println("------------------------------------------------");
-        validateTotalScore("APIs Test", framesScore, 53);
+        System.out.println("BowlingFrame 4 Score:" + game.getFrameScore(4));
+        displayScoreboard(game.displayScoreBoard());
         game.save();
     }
 
@@ -46,6 +45,7 @@ public class BowlingGameTest {
         Assert.assertEquals(47, allFramesScore[8]);
         Assert.assertEquals(56, allFramesScore[9]);
         validateTotalScore("NoStrikeNoSpare", allFramesScore, 56);
+        displayScoreboard(game.displayScoreBoard());
         game.save();
     }
 
@@ -182,7 +182,6 @@ public class BowlingGameTest {
         validateTotalScore("AnotherInput", allFramesScore, 140);
     }
 
-
     @Test
     public void TestInvalidPins() {
         int[] pinsPerBall = {0, 10, 0, 3, 2, 6, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 10};
@@ -204,7 +203,7 @@ public class BowlingGameTest {
         try {
             Arrays.stream(pinsPerBall).forEach(game::roll);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("\n" + e);
         }
         int[] allFramesScore = game.getAllFrameScore();
         Assert.assertEquals(1, allFramesScore[0]);
@@ -217,7 +216,7 @@ public class BowlingGameTest {
         Assert.assertEquals(38, allFramesScore[7]);
         Assert.assertEquals(47, allFramesScore[8]);
         Assert.assertEquals(56, allFramesScore[9]);
-        validateTotalScore("NoStrikeNoSpare", allFramesScore, 56);
+        validateTotalScore("InvalidNumberOfPins", allFramesScore, 56);
     }
 
     private void validateTotalScore(String testCase, int[] frameScores, int expectedTotalScore) {
@@ -227,14 +226,20 @@ public class BowlingGameTest {
                 .findAny()
                 .orElse(-1);
         Assert.assertEquals(expectedTotalScore, actualTotalScore);
-        System.out.println("==============================");
+        System.out.println("\n");
         System.out.println("TestCase::" + testCase);
         System.out.println("==============================");
         System.out.println("Frame No.  ->  " + " Frame Score");
         IntStream.range(0, framesLength)
                 .forEach(frameNumber -> System.out.println("Frame " + (frameNumber + 1) + "    ->   " + frameScores[frameNumber]));
-        System.out.println("==============================");
+        System.out.println(" ");
         System.out.println("Total Game Score:" + actualTotalScore);
-        System.out.println("==============================");
+    }
+
+    private void displayScoreboard(String scoreboard) {
+        System.out.println("\n");
+        System.out.println("Scoreboard:" + scoreboard);
+        System.out.println("LEGEND: 'X' - Strike frame , '/' - Spare Frame");
+        System.out.println("------------------------------------------------");
     }
 }

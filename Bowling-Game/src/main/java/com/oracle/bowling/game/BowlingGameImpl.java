@@ -6,8 +6,6 @@ import com.oracle.bowling.util.BowlingGameUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 
 import static com.oracle.bowling.constant.BowlingGameConstant.*;
 
@@ -21,19 +19,17 @@ import static com.oracle.bowling.constant.BowlingGameConstant.*;
  */
 public class BowlingGameImpl implements BowlingGame {
 
-    private static final Logger LOGGER = Logger.getLogger(BowlingGameImpl.class.getName());
+//    private static final Logger LOGGER = Logger.getLogger(BowlingGameImpl.class.getName());
 
     private int frameNumber = 1;
     private int ballNumber = 1;
     private int totalBallCount = 1;
     private BowlingScoreCalculator scoreCalculator;
     private BowlingGameScoreboard scoreboard;
-    private final List<BowlingFrame> bowlingFrames;
 
     public BowlingGameImpl(String playerName) {
         this.scoreCalculator = new BowlingScoreCalculator();
-        this.bowlingFrames = new ArrayList<>(MAX_FRAMES);
-        this.scoreboard = new BowlingGameScoreboard(playerName, bowlingFrames);
+        this.scoreboard = new BowlingGameScoreboard(playerName, new ArrayList<>(MAX_FRAMES));
     }
 
     /**
@@ -44,8 +40,7 @@ public class BowlingGameImpl implements BowlingGame {
      * @param pinsDown, pins down for a ball
      */
     public void roll(final int pinsDown) {
-
-        LOGGER.info("Ball rolled, Frame: " + frameNumber + ", Ball:" + ballNumber);
+//        LOGGER.info("Ball rolled, Frame: " + frameNumber + ", Ball:" + ballNumber);
         if (validatePins(pinsDown)) {
             final boolean lastFrame = frameNumber == LAST_FRAME;
             scoreCalculator.calculateFrameScore(frameNumber, ballNumber, pinsDown);
@@ -55,7 +50,7 @@ public class BowlingGameImpl implements BowlingGame {
                     : updateAfterSecondBall(bowlingFrame, lastFrame);
             totalBallCount++;
         } else {
-            LOGGER.info("Invalid Number of Pins or Negative Pins entered");
+//            LOGGER.info("Invalid Number of Pins or Negative Pins entered");
             throw new IllegalArgumentException("Invalid Number of Pins or Negative Pins entered. Exiting Game!!!");
         }
     }
@@ -68,8 +63,9 @@ public class BowlingGameImpl implements BowlingGame {
      */
     private boolean validatePins(int pinsDown) {
         if (frameNumber == 10 && ballNumber == BONUS_BALL) {
-            BowlingFrame lastFrame = bowlingFrames.get(frameNumber - 1);
-            if (lastFrame.getTotalPinsDown() < MAX_PINS
+            BowlingFrame lastFrame = scoreboard.getFrame(frameNumber - 1);
+            if (lastFrame != null
+                    && lastFrame.getTotalPinsDown() < MAX_PINS
                     && lastFrame.getTotalBalls() == MAX_FRAME_BALLS) {
                 return false;
             }
@@ -95,7 +91,7 @@ public class BowlingGameImpl implements BowlingGame {
 
         final boolean isStrike = pinsDown == MAX_PINS;
         if (isStrike) {
-            bowlingFrames.add(bowlingFrame);
+            scoreboard.addFrame(bowlingFrame);
         }
         if (!isStrike || lastFrame) {
             ballNumber++;
@@ -127,7 +123,7 @@ public class BowlingGameImpl implements BowlingGame {
                 ballNumber++;
             }
             if (!isStrike) {
-                bowlingFrames.add(bowlingFrame);
+                scoreboard.addFrame(bowlingFrame);
             }
         }
         return ballNumber;
@@ -140,7 +136,7 @@ public class BowlingGameImpl implements BowlingGame {
         try {
             BowlingGameUtil.saveToFile(scoreboard);
         } catch (IOException e) {
-            LOGGER.info("Exception while saving Game," + e);
+//            LOGGER.info("Exception while saving Game," + e);
         }
     }
 

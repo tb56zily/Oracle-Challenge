@@ -25,7 +25,17 @@ public class BowlingGameScoreboard {
     }
 
     /**
-     * @return list of all the frames of a game at that point.
+     * @return frame for given frame number
+     */
+    public BowlingFrame getFrame(int frameNumber) {
+        if (bowlingFrameList.size() > frameNumber) {
+            return bowlingFrameList.get(frameNumber);
+        }
+        return null;
+    }
+
+    /**
+     * @return array of all the frame score of a game at that point.
      */
     public int[] getAllFrameScore() {
         return bowlingFrameList.stream().mapToInt(BowlingFrame::getFrameScore).toArray();
@@ -46,6 +56,17 @@ public class BowlingGameScoreboard {
         return frameNumber < bowlingFrameList.size() ?
                 bowlingFrameList.get(frameNumber - 1).getFrameScore()
                 : 0;
+    }
+
+    /**
+     * adds a new frame to frame list.
+     *
+     * @param bowlingFrame, frame
+     */
+    public void addFrame(BowlingFrame bowlingFrame) {
+        if (bowlingFrameList.size() < 10) {
+            bowlingFrameList.add(bowlingFrame);
+        }
     }
 
     @Override

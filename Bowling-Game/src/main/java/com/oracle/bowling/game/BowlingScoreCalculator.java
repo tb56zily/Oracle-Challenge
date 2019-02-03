@@ -16,7 +16,7 @@ import static com.oracle.bowling.constant.BowlingGameConstant.*;
  */
 class BowlingScoreCalculator {
 
-    private static final Logger LOGGER = Logger.getLogger(BowlingScoreCalculator.class.getName());
+//    private static final Logger LOGGER = Logger.getLogger(BowlingScoreCalculator.class.getName());
 
     private final List<BowlingFrame> bowlingFrames;
     private int oldFrameScore = 0;
@@ -87,7 +87,7 @@ class BowlingScoreCalculator {
                     && previousFrame.isNotDone()) {
                 oldFrameScore += MAX_PINS + pinsDown;
                 previousFrame.setFrameScore(oldFrameScore);
-                LOGGER.info("Updating Score for Frame:" + currentFrameNumber);
+//                LOGGER.info("Updating Score for Frame:" + currentFrameNumber);
             }
         }
     }
@@ -112,7 +112,7 @@ class BowlingScoreCalculator {
                         && secondPreviousFrame.isNotDone()) {
                     oldFrameScore += MAX_PINS + MAX_PINS + currentBallPins;
                     secondPreviousFrame.setFrameScore(oldFrameScore);
-                    LOGGER.info("Updating Score for Frame:" + currentFrameNumber);
+//                    LOGGER.info("Updating Score for Frame:" + currentFrameNumber);
                 }
             }
         }

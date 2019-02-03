@@ -16,7 +16,7 @@ public class BowlingGameUtil {
 
     /**
      * @param scoreboard, scoreboard of a game
-     * @throws IOException, iffails to save
+     * @throws IOException if fails to save
      */
     public static void saveToFile(final BowlingGameScoreboard scoreboard) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(scoreboard.getPlayerName() + ".txt"));
