@@ -1,87 +1,175 @@
 package com.oracle.bowling.game;
 
-import com.oracle.bowling.model.Frame;
-import com.oracle.bowling.model.ScoreBoard;
+import com.oracle.bowling.model.BowlingFrame;
+import com.oracle.bowling.model.BowlingGameScoreboard;
+import com.oracle.bowling.util.BowlingGameUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
+import static com.oracle.bowling.game.BowlingGameConstant.*;
+
+
+/**
+ * This class implements Bowling Game operations.
+ * Provides API implementation for rolling a ball,
+ * retrieving frame scores, scoreboard and others.
+ *
+ * @author Tejamurthy
+ */
 public class BowlingGameImpl implements BowlingGame {
 
-    private String playerName;
-    private  int frameNumber=1;
-    private  int ballNumber=1;
-    private ScoreCalculator scoreCalculator;
-    private final List<Frame> frames = new ArrayList<>(10);
+    private static final Logger LOGGER = Logger.getLogger(BowlingGameImpl.class.getName());
+
+    private int frameNumber = 1;
+    private int ballNumber = 1;
+    private int totalBallCount = 1;
+    private BowlingScoreCalculator scoreCalculator;
+    private BowlingGameScoreboard scoreboard;
+    private final List<BowlingFrame> bowlingFrames;
 
     public BowlingGameImpl(String playerName) {
-        this.playerName = playerName;
-        this.scoreCalculator=new ScoreCalculator();
+        this.scoreCalculator = new BowlingScoreCalculator();
+        this.bowlingFrames = new ArrayList<>(MAX_FRAMES);
+        this.scoreboard = new BowlingGameScoreboard(playerName, bowlingFrames);
     }
 
-    public void roll(int pinsDown) {
-        boolean lastFrame=frameNumber == 10;
-        final Frame frame = scoreCalculator.calculateFrameScore(frameNumber, ballNumber, pinsDown);
-        ballNumber= ballNumber==1?processBall1(pinsDown, frame, lastFrame): processBall2(pinsDown, frame, lastFrame);
-         /* if(ballNumber==1 ){
-               processBall1(pinsDown, frame, lastFrame);
-        }else{
-              processBall2(pinsDown, frame, lastFrame);
-        }*/
-    }
+    /**
+     * Receives number of pins down for a ball,
+     * creates Bowling Frame and
+     * calculates frame score.
+     *
+     * @param pinsDown, pins down for a ball
+     */
+    public void roll(final int pinsDown) {
 
-    //TODO change name of proceesballs
-    private int processBall1(int pinsDown, Frame frame, boolean isLastFrame) {
-        boolean isStrike = pinsDown==10;
-        if(isStrike){
-            frames.add(frame);
+        LOGGER.info("Ball rolled, Frame: " + frameNumber + ", Ball:" + ballNumber);
+        if (validatePins(pinsDown)) {
+            final boolean lastFrame = frameNumber == LAST_FRAME;
+            scoreCalculator.calculateFrameScore(frameNumber, ballNumber, pinsDown);
+            final BowlingFrame bowlingFrame = scoreCalculator.getFrame(frameNumber);
+            ballNumber = ballNumber == BALL_1 ?
+                    updateAfterFirstBall(pinsDown, bowlingFrame, lastFrame)
+                    : updateAfterSecondBall(pinsDown, bowlingFrame, lastFrame);
+            totalBallCount++;
+        } else {
+            LOGGER.info("Invalid Number of Pins or Negative Pins entered");
+            throw new IllegalArgumentException("Invalid Number of Pins or Negative Pins entered. Exiting Game!!!");
         }
-        if(!isStrike || isLastFrame){
+    }
+
+    /**
+     * Validates input pins down
+     *
+     * @param pinsDown, pins down for a ball
+     * @return true if valid
+     */
+    private boolean validatePins(int pinsDown) {
+        if (frameNumber == 10 && ballNumber == BONUS_BALL) {
+            BowlingFrame lastFrame = bowlingFrames.get(frameNumber - 1);
+            if (lastFrame.getTotalPinsDown() < MAX_PINS
+                    && lastFrame.getTotalBalls() == MAX_FRAME_BALLS) {
+                return false;
+            }
+        }
+        return pinsDown >= 0 && pinsDown <= 10 && totalBallCount <= MAX_BALLS;
+    }
+
+    /**
+     * After processing pins down for every first ball
+     * of a frame, this method updates 'ball number(1-2)',
+     * 'frame number(1-10)' and adds current bowling frame
+     * to list of frames.
+     *
+     * @param pinsDown,     pins down for every first ball
+     * @param bowlingFrame, current bowling frame
+     * @param lastFrame,    true only for tenth bowling frame
+     * @return next ball number(1 0r 2)
+     */
+    private int updateAfterFirstBall(
+            final int pinsDown,
+            final BowlingFrame bowlingFrame,
+            final boolean lastFrame) {
+
+        final boolean isStrike = pinsDown == MAX_PINS;
+        if (isStrike) {
+            bowlingFrames.add(bowlingFrame);
+        }
+        if (!isStrike || lastFrame) {
             ballNumber++;
         }
-        if(isStrike && !isLastFrame){
+        if (isStrike && !lastFrame) {
             frameNumber++;
         }
         return ballNumber;
     }
 
-    private int processBall2(int pinsDown, Frame frame, boolean lastFrame) {
-        if(ballNumber<3) {
-            int ball1Score = frame.getBallScore(0);
-            boolean isStrike = ball1Score == 10;
-            boolean isSpare = ball1Score + pinsDown == 10;
+    /**
+     * After processing pinsDown for every second ball
+     * of a bowling frame, this method updates 'ball number(1-3)',
+     * 'frame number(1-10)' and adds current bowling frame
+     * to list of frames.
+     *
+     * @param bowlingFrame, current bowling frame
+     * @param lastFrame,    true only for tenth bowling frame
+     * @param pinsDown
+     * @return next ball number(1, 2, 3)
+     */
+    private int updateAfterSecondBall(int pinsDown, final BowlingFrame bowlingFrame, final boolean lastFrame) {
+        final int ball1Score = bowlingFrame.getPinsForBall(BALL_1);
+        final boolean isStrike = ball1Score == MAX_PINS;
+        final boolean isSpare = ball1Score + pinsDown == MAX_PINS;
+        if (ballNumber < 3) {
             if (!lastFrame) {
                 ballNumber = 1;
                 frameNumber++;
-            } else if (isSpare || isStrike) {
+            } else {
                 ballNumber++;
             }
             if (!isStrike) {
-                frames.add(frame);
+                bowlingFrames.add(bowlingFrame);
             }
         }
         return ballNumber;
     }
 
+    /**
+     * Saves current state of Game into a file
+     */
     public void save() {
-//TODO
+        try {
+            BowlingGameUtil.saveToFile(scoreboard);
+        } catch (IOException e) {
+            LOGGER.info("Exception while saving Game," + e);
+        }
     }
 
-    public int getFrameScore(int frameNumber) {
-        return frameNumber<frames.size()?frames.get(frameNumber-1).getFrameScore():0;
+    /**
+     * @param frameNumber, frame number
+     * @return frame score for the input frame number
+     */
+    public int getFrameScore(final int frameNumber) {
+        return scoreboard.getFrameScore(frameNumber);
     }
 
-    public int[] getFramesScore() {
-        return frames.stream().mapToInt(Frame::getFrameScore).toArray();
+    /**
+     * @return score of all 'completed' bowling frames
+     */
+    public int[] getAllFrameScore() {
+        return scoreboard.getAllFrameScore();
     }
 
+    /**
+     * @return total score of a Bowling Game at that point
+     */
     public int getTotalScore() {
-        return frames.get(frames.size()-1).getFrameScore();
+        return scoreboard.getTotalGameScore();
     }
 
     @Override
-    public ScoreBoard retrieveScoreBoard() {
-        return new ScoreBoard(playerName,Collections.unmodifiableList(frames));
+    public String displayScoreBoard() {
+        return scoreboard.toString();
     }
 }
