@@ -12,10 +12,13 @@ public class ScoreCalculator {
     private final List<Frame> frames;
     private int previousScore = 0;
 
+    //TODO strategy pattern
+
     public ScoreCalculator() {
         frames = new ArrayList<>(10);
     }
 
+    // TODO add docs, naming convention save option, apply logs, in score board put x insted 10 and \ instead spare
     public Frame calculateFrameScore(int frameNumber, int ballNumber, int pinsDown) {
         Ball ball = new Ball(ballNumber, pinsDown);
         if (ballNumber == 1) {
@@ -38,6 +41,7 @@ public class ScoreCalculator {
         return frames.get(frameNumber - 1);
     }
 
+    //TODO create file for constants or property
     private void isPreviousFrameStrikeOrSpare(int currentFrameNumber, int currentBallScore, int ballNumber) {
         if (currentFrameNumber > 1) {
             Frame previousFrame = frames.get(currentFrameNumber - 2);
@@ -51,6 +55,7 @@ public class ScoreCalculator {
         }
     }
 
+    //TODO add constants for 10, ball==1, strike score, maxscore etc.
     private void checkPreviousFramesForStrike(int currentFrameNumber, int currentBallScore) {
         if (currentFrameNumber > 1) {
             Frame previousFrame = frames.get(currentFrameNumber - 2);
