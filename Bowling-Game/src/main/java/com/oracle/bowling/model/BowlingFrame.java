@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents 'BowlingFrame' of a Bowling Game.
+ * This class represents 'Bowling Frame' of a Bowling Game.
  * It includes frame number, list of balls and
  * frame score for every frame.
  *

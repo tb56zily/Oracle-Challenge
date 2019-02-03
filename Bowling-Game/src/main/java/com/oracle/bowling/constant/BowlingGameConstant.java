@@ -1,4 +1,4 @@
-package com.oracle.bowling.game;
+package com.oracle.bowling.constant;
 
 
 /**

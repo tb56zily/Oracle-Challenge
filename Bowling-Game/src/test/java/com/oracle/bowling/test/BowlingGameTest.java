@@ -17,7 +17,7 @@ public class BowlingGameTest {
         IntStream.range(0, 10).forEach(i -> game.roll(pinsPerBall[i]));
         int[] framesScore = game.getAllFrameScore();
         System.out.println("------------------------------------------------");
-        System.out.println(game.displayScoreBoard());
+        System.out.println("Scoreboard:" + game.displayScoreBoard());
         System.out.println("------------------------------------------------");
         System.out.println("BowlingFrame 4 Score:" + game.getFrameScore(4));
         System.out.println("------------------------------------------------");
@@ -233,5 +233,8 @@ public class BowlingGameTest {
         System.out.println("Frame No.  ->  " + " Frame Score");
         IntStream.range(0, framesLength)
                 .forEach(frameNumber -> System.out.println("Frame " + (frameNumber + 1) + "    ->   " + frameScores[frameNumber]));
+        System.out.println("==============================");
+        System.out.println("Total Game Score:" + actualTotalScore);
+        System.out.println("==============================");
     }
 }

@@ -3,7 +3,7 @@ package com.oracle.bowling.model;
 import java.util.List;
 
 /**
- * This class represents 'BowlingGameScoreboard' of a Bowling Game.
+ * This class represents 'Scoreboard' of a Bowling Game.
  * It includes Player name, list of frames and
  * frame score for every frame.
  *
@@ -50,8 +50,7 @@ public class BowlingGameScoreboard {
 
     @Override
     public String toString() {
-        return "BowlingGame Scoreboard:" +
-                "\nPlayer Name='" + playerName + '\'' +
+        return "\nPlayer Name='" + playerName + '\'' +
                 "\nTotal Score=" + getTotalGameScore() +
                 "\nFrame Score=" + bowlingFrameList;
     }

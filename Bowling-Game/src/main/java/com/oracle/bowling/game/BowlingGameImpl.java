@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static com.oracle.bowling.game.BowlingGameConstant.*;
+import static com.oracle.bowling.constant.BowlingGameConstant.*;
 
 
 /**
@@ -52,7 +52,7 @@ public class BowlingGameImpl implements BowlingGame {
             final BowlingFrame bowlingFrame = scoreCalculator.getFrame(frameNumber);
             ballNumber = ballNumber == BALL_1 ?
                     updateAfterFirstBall(pinsDown, bowlingFrame, lastFrame)
-                    : updateAfterSecondBall(pinsDown, bowlingFrame, lastFrame);
+                    : updateAfterSecondBall(bowlingFrame, lastFrame);
             totalBallCount++;
         } else {
             LOGGER.info("Invalid Number of Pins or Negative Pins entered");
@@ -114,13 +114,11 @@ public class BowlingGameImpl implements BowlingGame {
      *
      * @param bowlingFrame, current bowling frame
      * @param lastFrame,    true only for tenth bowling frame
-     * @param pinsDown
      * @return next ball number(1, 2, 3)
      */
-    private int updateAfterSecondBall(int pinsDown, final BowlingFrame bowlingFrame, final boolean lastFrame) {
+    private int updateAfterSecondBall(final BowlingFrame bowlingFrame, final boolean lastFrame) {
         final int ball1Score = bowlingFrame.getPinsForBall(BALL_1);
         final boolean isStrike = ball1Score == MAX_PINS;
-        final boolean isSpare = ball1Score + pinsDown == MAX_PINS;
         if (ballNumber < 3) {
             if (!lastFrame) {
                 ballNumber = 1;

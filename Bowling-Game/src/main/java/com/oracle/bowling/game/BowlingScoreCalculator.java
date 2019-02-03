@@ -4,11 +4,10 @@ import com.oracle.bowling.model.Ball;
 import com.oracle.bowling.model.BowlingFrame;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static com.oracle.bowling.game.BowlingGameConstant.*;
+import static com.oracle.bowling.constant.BowlingGameConstant.*;
 
 /**
  * This class implements logic for score calculation.
@@ -119,12 +118,12 @@ class BowlingScoreCalculator {
         }
     }
 
-    public BowlingFrame getFrame(int frameNumber) {
+    /**
+     * @param frameNumber, frame number
+     * @return Bowling Frame and its details for given frame number
+     */
+    BowlingFrame getFrame(int frameNumber) {
         return bowlingFrames.get(frameNumber - 1);
     }
 
-
-    public List<BowlingFrame> getFrameList() {
-        return Collections.unmodifiableList(bowlingFrames);
-    }
 }
