@@ -5,7 +5,7 @@
 The project Bowling-Game is developed to calculate score of a bowling game by receiving 'pins-down' for each ball.
 In a bowling game there are maximum of ten frames where each frame has maximum of two balls to strike the pins, 
 except the bonus ball. Bonus ball is a third ball in the last frame of a bowling game. Bonus ball is added only 
-when the player strike down all 10 pins either in first ball of second ball.
+when the player strikes down all 10 pins either in first ball or second ball.
 
 Each frame of a game can be one of the three types. a) MISS - the frame with maximum pins down are less than 10, 
 b) SPARE - the frame where ball 2 has downed all pins remained after ball 1 and c) STRIKE - the frame where 
