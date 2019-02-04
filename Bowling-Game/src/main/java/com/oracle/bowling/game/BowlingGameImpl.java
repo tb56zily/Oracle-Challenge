@@ -1,5 +1,6 @@
 package com.oracle.bowling.game;
 
+import com.oracle.bowling.exception.InvalidPinsException;
 import com.oracle.bowling.model.BowlingFrame;
 import com.oracle.bowling.model.BowlingGameScoreboard;
 import com.oracle.bowling.util.BowlingGameUtil;
@@ -51,7 +52,7 @@ public class BowlingGameImpl implements BowlingGame {
             totalBallCount++;
         } else {
             LOGGER.error("Invalid Number of Pins or Negative Pins entered");
-            throw new IllegalArgumentException("Invalid Number of Pins or Negative Pins entered. Exiting Game!!!");
+            throw new InvalidPinsException("Invalid Number of Pins or Negative Pins entered. Exiting Game!!!");
         }
     }
 

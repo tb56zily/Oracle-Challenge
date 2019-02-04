@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 
 public class BowlingGameTest {
 
+
     @Test
     public void TestAllAPIs() {
         int[] pinsPerBall = {0, 0, 10, 0, 8, 1, 8, 0, 10, 8, 1, 1, 0, 8, 2, 4, 5, 5, 4};
