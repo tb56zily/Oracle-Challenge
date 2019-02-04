@@ -236,6 +236,7 @@ public class BowlingGameTest {
                 .forEach(frameNumber -> System.out.println("Frame " + (frameNumber + 1) + "    ->   " + frameScores[frameNumber]));
         System.out.println(" ");
         System.out.println("Total Game Score:" + actualTotalScore);
+        System.out.println("==============================");
     }
 
     private void displayScoreboard(String scoreboard) {

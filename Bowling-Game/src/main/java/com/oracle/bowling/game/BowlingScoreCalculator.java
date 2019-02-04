@@ -2,10 +2,10 @@ package com.oracle.bowling.game;
 
 import com.oracle.bowling.model.Ball;
 import com.oracle.bowling.model.BowlingFrame;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static com.oracle.bowling.constant.BowlingGameConstant.*;
 
@@ -16,7 +16,7 @@ import static com.oracle.bowling.constant.BowlingGameConstant.*;
  */
 class BowlingScoreCalculator {
 
-//    private static final Logger LOGGER = Logger.getLogger(BowlingScoreCalculator.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BowlingScoreCalculator.class);
 
     private final List<BowlingFrame> bowlingFrames;
     private int oldFrameScore = 0;
@@ -57,6 +57,7 @@ class BowlingScoreCalculator {
                 ball.setSpare(true);
             }
             if (frameNumber == LAST_FRAME) {
+                LOGGER.info("Updating Score for Last Frame:" + frameNumber);
                 currentFrame.setFrameScore(oldFrameScore + currentFrameScore);
             }
         }
@@ -87,7 +88,7 @@ class BowlingScoreCalculator {
                     && previousFrame.isNotDone()) {
                 oldFrameScore += MAX_PINS + pinsDown;
                 previousFrame.setFrameScore(oldFrameScore);
-//                LOGGER.info("Updating Score for Frame:" + currentFrameNumber);
+                LOGGER.info("Updating Score for Strike/Spare Frame:" + currentFrameNumber);
             }
         }
     }
@@ -112,7 +113,7 @@ class BowlingScoreCalculator {
                         && secondPreviousFrame.isNotDone()) {
                     oldFrameScore += MAX_PINS + MAX_PINS + currentBallPins;
                     secondPreviousFrame.setFrameScore(oldFrameScore);
-//                    LOGGER.info("Updating Score for Frame:" + currentFrameNumber);
+                    LOGGER.info("Updating Score for Strike Frame:" + currentFrameNumber);
                 }
             }
         }

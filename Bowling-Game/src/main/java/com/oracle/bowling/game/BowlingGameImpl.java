@@ -3,6 +3,7 @@ package com.oracle.bowling.game;
 import com.oracle.bowling.model.BowlingFrame;
 import com.oracle.bowling.model.BowlingGameScoreboard;
 import com.oracle.bowling.util.BowlingGameUtil;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import static com.oracle.bowling.constant.BowlingGameConstant.*;
  */
 public class BowlingGameImpl implements BowlingGame {
 
-//    private static final Logger LOGGER = Logger.getLogger(BowlingGameImpl.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BowlingGameImpl.class);
 
     private int frameNumber = 1;
     private int ballNumber = 1;
@@ -40,7 +41,7 @@ public class BowlingGameImpl implements BowlingGame {
      * @param pinsDown, pins down for a ball
      */
     public void roll(final int pinsDown) {
-//        LOGGER.info("Ball rolled, Frame: " + frameNumber + ", Ball:" + ballNumber);
+        LOGGER.info("Ball rolled, Frame: " + frameNumber + ", Ball:" + ballNumber);
         if (validatePins(pinsDown)) {
             final boolean lastFrame = frameNumber == LAST_FRAME;
             scoreCalculator.calculateFrameScore(frameNumber, ballNumber, pinsDown);
@@ -50,7 +51,7 @@ public class BowlingGameImpl implements BowlingGame {
                     : updateAfterSecondBall(bowlingFrame, lastFrame);
             totalBallCount++;
         } else {
-//            LOGGER.info("Invalid Number of Pins or Negative Pins entered");
+            LOGGER.error("Invalid Number of Pins or Negative Pins entered");
             throw new IllegalArgumentException("Invalid Number of Pins or Negative Pins entered. Exiting Game!!!");
         }
     }
@@ -136,7 +137,7 @@ public class BowlingGameImpl implements BowlingGame {
         try {
             BowlingGameUtil.saveToFile(scoreboard);
         } catch (IOException e) {
-//            LOGGER.info("Exception while saving Game," + e);
+            LOGGER.error("Exception while saving Game," + e);
         }
     }
 
