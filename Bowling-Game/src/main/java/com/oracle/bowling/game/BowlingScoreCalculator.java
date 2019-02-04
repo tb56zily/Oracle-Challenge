@@ -26,10 +26,10 @@ class BowlingScoreCalculator {
     }
 
     /**
-     * Creates Bowling Frame and a Frame Ball for every
-     * incoming ball. It creates bowling frames list and
-     * calculates score for each frame
-     * based on 'STRIKE', 'MISS' and 'SPARE' strategy.
+     * Creates 'Bowling' Frame and a 'Ball' for every
+     * incoming pins down input. It creates frames list
+     * and calculates score for each frame based on
+     * 'STRIKE', 'MISS' and 'SPARE' strategy.
      *
      * @param frameNumber, frame number
      * @param ballNumber,  ball number

@@ -1,0 +1,4 @@
+
+Player Name='Player 2'
+Total Score=200
+Frame Score=[[Frame:1 [Ball 1:X], Frame Score:20], [Frame:2 [Ball 1:8, Ball 2:/], Frame Score:40], [Frame:3 [Ball 1:X], Frame Score:60], [Frame:4 [Ball 1:9, Ball 2:/], Frame Score:80], [Frame:5 [Ball 1:X], Frame Score:100], [Frame:6 [Ball 1:0, Ball 2:/], Frame Score:120], [Frame:7 [Ball 1:X], Frame Score:140], [Frame:8 [Ball 1:3, Ball 2:/], Frame Score:160], [Frame:9 [Ball 1:X], Frame Score:180], [Frame:10 [Ball 1:5, Ball 2:/, Ball 3:/], Frame Score:200]]

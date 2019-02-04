@@ -35,7 +35,6 @@ public class BowlingGameImpl implements BowlingGame {
 
     /**
      * Receives number of pins down for a ball,
-     * creates Bowling Frame and
      * calculates frame score.
      *
      * @param pinsDown, pins down for a ball
@@ -83,7 +82,7 @@ public class BowlingGameImpl implements BowlingGame {
      * @param pinsDown,     pins down for every first ball
      * @param bowlingFrame, current bowling frame
      * @param lastFrame,    true only for tenth bowling frame
-     * @return next ball number(1 0r 2)
+     * @return next ball number(1 or 2)
      */
     private int updateAfterFirstBall(
             final int pinsDown,
