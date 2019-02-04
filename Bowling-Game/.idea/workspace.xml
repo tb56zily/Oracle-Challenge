@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e7b0529-01b5-4247-8757-593c25c480bc" name="Default" comment="Fixing some issues">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/oracle/bowling/game/BowlingGameImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/oracle/bowling/game/BowlingGameImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/oracle/bowling/game/BowlingScoreCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/oracle/bowling/game/BowlingScoreCalculator.java" afterDir="false" />
-    </list>
+    <list default="true" id="5e7b0529-01b5-4247-8757-593c25c480bc" name="Default" comment="Fixing some issues" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,7 +28,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BowlingScoreCalculator.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BowlingScoreCalculator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/bowling/game/BowlingScoreCalculator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-846">
@@ -44,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="31" />
+            <state relative-caret-position="144">
+              <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -180,11 +176,6 @@
             <path>
               <item name="Bowling-Game" type="b2602c69:ProjectViewProjectNode" />
               <item name="Bowling-Game" type="462c0819:PsiDirectoryNode" />
-              <item name="logs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Bowling-Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Bowling-Game" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -207,6 +198,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="bowling" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bowling-Game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Bowling-Game" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bowling" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -437,7 +437,7 @@
       <workItem from="1549168698760" duration="448000" />
       <workItem from="1549191173739" duration="27356000" />
       <workItem from="1549225103831" duration="733000" />
-      <workItem from="1549267112389" duration="13564000" />
+      <workItem from="1549267112389" duration="13821000" />
     </task>
     <task id="LOCAL-00001" summary="Commenting logs">
       <created>1549233889813</created>
@@ -489,11 +489,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85887000" />
+    <option name="totallyTimeSpent" value="86144000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="0" width="1372" height="769" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="bottom" id="TODO" order="11" />
@@ -903,7 +902,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/bowling/game/BowlingGameValidator.java" />
-    <entry file="file://$PROJECT_DIR$/Player 2.txt" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/bowling/util/BowlingGameUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -996,6 +994,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Player 2.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/bowling/game/BowlingScoreCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-846">
@@ -1003,13 +1011,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="31" />
         </state>
       </provider>
     </entry>

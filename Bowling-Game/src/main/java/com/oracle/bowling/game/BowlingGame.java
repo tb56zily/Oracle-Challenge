@@ -35,6 +35,13 @@ public interface BowlingGame {
     int[] getAllFrameScore();
 
     /**
+     * Retrieves frame score for current frame
+     *
+     * @return frames score for current frame
+     */
+    int getCurrentFrameScore();
+
+    /**
      * Retrieves total score of a Bowling Game
      *
      * @return total score of a game

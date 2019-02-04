@@ -41,7 +41,7 @@ public class BowlingGameImpl implements BowlingGame {
      */
     public void roll(final int pinsDown) {
         LOGGER.info("Ball rolled, Frame: " + frameNumber + ", Ball:" + ballNumber);
-        if (validatePins(pinsDown)) {
+        if (validatePins(pinsDown) && ballNumber > 0) {
             final boolean lastFrame = frameNumber == LAST_FRAME;
             scoreCalculator.calculateFrameScore(frameNumber, ballNumber, pinsDown);
             final BowlingFrame bowlingFrame = scoreCalculator.getFrame(frameNumber);
@@ -125,6 +125,8 @@ public class BowlingGameImpl implements BowlingGame {
             if (!isStrike) {
                 scoreboard.addFrame(bowlingFrame);
             }
+        } else {
+            ballNumber = -1;
         }
         return ballNumber;
     }
@@ -132,6 +134,7 @@ public class BowlingGameImpl implements BowlingGame {
     /**
      * Saves current state of Game into a file
      */
+    @Override
     public void save() {
         try {
             BowlingGameUtil.saveToFile(scoreboard);
@@ -144,6 +147,7 @@ public class BowlingGameImpl implements BowlingGame {
      * @param frameNumber, frame number
      * @return frame score for the input frame number
      */
+    @Override
     public int getFrameScore(final int frameNumber) {
         return scoreboard.getFrameScore(frameNumber);
     }
@@ -151,8 +155,17 @@ public class BowlingGameImpl implements BowlingGame {
     /**
      * @return score of all 'completed' bowling frames
      */
+    @Override
     public int[] getAllFrameScore() {
         return scoreboard.getAllFrameScore();
+    }
+
+    /**
+     * @return score for current frame
+     */
+    @Override
+    public int getCurrentFrameScore() {
+        return scoreboard.getFrameScore(frameNumber);
     }
 
     /**
